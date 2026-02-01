@@ -12,7 +12,7 @@
         :root {
             --blue-roi: #0F1E4E;
             --blue-light: #488AC7;
-            --matisse-orange: #FF9F80;
+            --matisse-orange: #FFFFFF;
             --white: #FFFFFF;
             --off-white: #FAFAFA;
             --text-dark: #2C2C2C;
@@ -83,45 +83,51 @@
         
         .nav-overlay.open { width: 100%; }
         .nav-overlay.open a { opacity: 1; }
-        .nav-overlay a:hover { color: var(--matisse-orange); letter-spacing: 2px; }
 
-        /* --- SECTION 1: ACCUEIL --- */
+ /* --- MISE EN PAGE GLOBALE (C'est ce qui manquait !) --- */
+        section {
+            padding: 80px 10%; /* Redonne de l'espace à toutes les sections */
+            position: relative;
+            max-width: 1600px; /* Évite que ça s'étire trop sur écran géant */
+            margin: 0 auto;
+        }
+
+        .section-header { text-align: center; margin-bottom: 60px; }
+        .section-title { font-size: 3rem; margin-bottom: 10px; }
+        .section-intro { font-size: 1.1rem; color: #666; max-width: 700px; margin: 0 auto; }
+
+/* --- SECTION 1: ACCUEIL (Style plein écran récupéré) --- */
         #accueil {
             height: 100vh;
-            display: flex;
-            background: var(--white);
+            width: 100%;
             padding: 0;
-        }
-        
-        .hero-image {
-            width: 66.66%; /* Garde les 2/3 de la page  */
-            height: 100vh; /* Toute la hauteur de l'écran [cite: 19] */
-            overflow: hidden; /* Empêche l'image de dépasser des 2/3  */
-            position: relative;
-        }
-
-        .hero-image img {
-            width: 100%; /* Prend toute la largeur des 2/3 */
-            height: 100%; /* Prend toute la hauteur des 2/3 */
-            object-fit: cover; /* Remplace le 'background-size: cover' pour remplir l'espace sans déformation [cite: 21] */
-            display: block;
+            display: flex;
+            align-items: stretch; 
+            /* C'est ici qu'on met l'image en fond */
+            background-image: url('Screenshot_20251005_194840.jpg'); 
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Effet de profondeur */
         }
 
         .hero-info {
-            width: 33.33%;
+            width: 35%; /* La largeur de la bande blanche */
+            min-width: 450px;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding: 40px;
-            background-color: var(--white);
-            border-left: 5px solid var(--blue-roi);
-            position: relative;
+            padding: 0 60px;
+            
+            /* L'effet de transparence blanc */
+            background-color: rgba(255, 255, 255, 0.92); 
+            backdrop-filter: blur(5px);
+            border-right: 3px solid var(--blue-roi);
         }
 
         .hero-info h1 {
             font-size: 3.5rem;
             line-height: 1.1;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
         
         .hero-date {
@@ -130,13 +136,20 @@
             color: var(--text-dark);
             margin-bottom: 40px;
             letter-spacing: 2px;
+            border-bottom: 2px solid var(--matisse-orange);
+            display: inline-block;
+            padding-bottom: 10px;
         }
 
         .hero-details {
             border-top: 1px solid var(--blue-roi);
             padding-top: 20px;
         }
-
+        
+        /* On cache l'ancien bloc image s'il reste dans le HTML */
+        .hero-image {
+            display: none;
+        }
         /* --- SECTIONS GÉNÉRALES --- */
         section {
             padding: 80px 10%; 
@@ -354,25 +367,19 @@
             margin: 0 auto;
         }
 
-        /* --- MOBILE --- */
-        @media (max-width: 768px) {
-            #accueil { flex-direction: column-reverse; }
-            .hero-image, .hero-info { width: 100%; height: 50vh; }
-            .hero-info { padding: 20px; border-left: none; border-top: 5px solid var(--blue-roi); }
-            
-            section { padding: 60px 20px; }
-            
-            .access-grid { grid-template-columns: 1fr; }
-            
-            .grid-cards-3col { grid-template-columns: 1fr; }
-            
-            .retour-grid { grid-template-columns: 1fr; }
-            .retour-image { height: 250px; margin-top: 20px; }
-        }
 
+/* --- MOBILE --- */
+        @media (max-width: 900px) {
+
+            section { padding: 60px 5%; }
+            .hero-info { width: 100%; min-width: 100%; padding: 80px 30px; background-color: rgba(255,255,255,0.95); border-right: none; text-align: center; }
+            .hero-info h1 { font-size: 3.5rem; }
+            .access-grid, .retour-grid, .grid-cards-3col { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
+
 
     <div class="menu-btn" onclick="toggleNav()">
         <div class="bar"></div>
