@@ -94,12 +94,17 @@
         }
         
         .hero-image {
-            width: 66.66%; 
-            /* PLACEHOLDER PHOTO COUPLE */
-            background-image: url('Screenshot_20251005_194840.jpg'); 
-            background-size: cover;
-            background-position: center;
+            width: 66.66%; /* Garde les 2/3 de la page  */
+            height: 100vh; /* Toute la hauteur de l'écran [cite: 19] */
+            overflow: hidden; /* Empêche l'image de dépasser des 2/3  */
             position: relative;
+        }
+
+        .hero-image img {
+            width: 100%; /* Prend toute la largeur des 2/3 */
+            height: 100%; /* Prend toute la hauteur des 2/3 */
+            object-fit: cover; /* Remplace le 'background-size: cover' pour remplir l'espace sans déformation [cite: 21] */
+            display: block;
         }
 
         .hero-info {
@@ -401,7 +406,8 @@
             </div>
         </div>
         <div class="hero-image">
-            </div>
+            <img src="Screenshot_20251005_194840.jpg" alt="Peinture de mariage">
+        </div>
     </section>
 
     <section id="agenda">
